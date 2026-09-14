@@ -5,6 +5,9 @@
 __pycache__/
 *.pyc
 
+# Java build output
+build/
+
 # IDE settings
 .vscode/
 
