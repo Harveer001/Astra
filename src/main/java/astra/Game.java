@@ -5,16 +5,19 @@ import astra.graphics.GamePanel;
 
 public class Game {
 
-    private boolean running;
+    private volatile boolean running;
     private final JFrame window;
     private final GamePanel gamePanel;
     private final Time time;
     private final Thread gameThread;
+    private final MotionState earthMotion = new MotionState(0, 0, 100, 50);
+    private final Body earth = new Body(1000, 20, earthMotion);
+    private final PhysicsSystem physicsSystem = new PhysicsSystem();
 
     public Game() {
 
         window = new JFrame("astra");
-        gamePanel = new GamePanel();
+        gamePanel = new GamePanel(earth);
         time = new Time();
 
         gameThread = new Thread(this::run);
@@ -27,21 +30,22 @@ public class Game {
 
     private void run() {
         while(running) {
-                time.update();
+            time.update();
 
-                while(time.shouldUpdatePhysics()) {
-                    update();
-                    time.consumePhysicsStep();
-                }
-
-                render();
-
-                try {
-                    Thread.sleep(1);
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                }
+            while(time.shouldUpdatePhysics()) {
+                update();
+                time.consumePhysicsStep();
             }
+
+            render();
+
+            try {
+                Thread.sleep(1);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                break;
+            }
+        }
     }
 
     public void start() {
@@ -56,7 +60,7 @@ public class Game {
     }
 
     public void update() {
-        // update simulation
+        physicsSystem.update(earth, Time.FIXED_DELTA_TIME);
     }
 
     public void render() {
