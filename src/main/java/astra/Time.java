@@ -1,4 +1,5 @@
-package sim3dwater;
+package astra
+;
 
 public class Time {
     public static final double PHYSICS_UPDATES_PER_SECOND = 30.0;

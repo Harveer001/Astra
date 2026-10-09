@@ -1,7 +1,7 @@
-package sim3dwater;
+package astra;
 
 import javax.swing.JFrame;
-import sim3dwater.graphics.GamePanel;
+import astra.graphics.GamePanel;
 
 public class Game {
 
@@ -13,7 +13,7 @@ public class Game {
 
     public Game() {
 
-        window = new JFrame("Sim3dWater");
+        window = new JFrame("astra");
         gamePanel = new GamePanel();
         time = new Time();
 

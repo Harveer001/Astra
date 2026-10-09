@@ -1,4 +1,4 @@
-package sim3dwater.graphics;
+package astra.graphics;
 
 import javax.swing.JPanel;
 import java.awt.Graphics;
