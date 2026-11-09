@@ -1,7 +1,15 @@
-package astra;
+package astra.demo;
 
 import javax.swing.JFrame;
-import astra.graphics.GamePanel;
+
+import astra.core.Time;
+import astra.physics.body.Body;
+import astra.visualization.GamePanel;
+import astra.physics.body.MotionState;
+import astra.physics.math.Vector2D;
+import astra.physics.world.PhysicsWorld;
+import astra.physics.PhysicsSystem;
+
 
 public class Game {
 
@@ -10,14 +18,29 @@ public class Game {
     private final GamePanel gamePanel;
     private final Time time;
     private final Thread gameThread;
-    private final MotionState earthMotion = new MotionState(0, 0, 100, 50);
+
+    private final PhysicsWorld world = new PhysicsWorld();
+    
+    //Bodies
+    private final MotionState earthMotion = new MotionState(
+        new Vector2D(-75, 0),
+        new Vector2D(0, 0)
+    );
     private final Body earth = new Body(1000, 20, earthMotion);
+    private final MotionState moonMotion = new MotionState(
+        new Vector2D(50, 50),
+        new Vector2D(4, 20)
+    );
+    private final Body moon = new Body(100, 5, moonMotion);
+
     private final PhysicsSystem physicsSystem = new PhysicsSystem();
 
     public Game() {
+        world.addBody(earth);
+        world.addBody(moon);
 
         window = new JFrame("astra");
-        gamePanel = new GamePanel(earth);
+        gamePanel = new GamePanel(world);
         time = new Time();
 
         gameThread = new Thread(this::run);
@@ -60,7 +83,7 @@ public class Game {
     }
 
     public void update() {
-        physicsSystem.update(earth, Time.FIXED_DELTA_TIME);
+        physicsSystem.update(world, Time.FIXED_DELTA_TIME);
     }
 
     public void render() {

@@ -1,4 +1,4 @@
-package astra;
+package astra.physics.body;
 
 public class Body {
     private double mass;

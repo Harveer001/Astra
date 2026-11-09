@@ -1,5 +1,4 @@
-package astra
-;
+package astra.core;
 
 public class Time {
     public static final double PHYSICS_UPDATES_PER_SECOND = 60.0;
