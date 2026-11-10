@@ -19,26 +19,10 @@ public class Game {
     private final Time time;
     private final Thread gameThread;
 
-    private final PhysicsWorld world = new PhysicsWorld();
-    
-    //Bodies
-    private final MotionState earthMotion = new MotionState(
-        new Vector2D(-75, 0),
-        new Vector2D(0, 0)
-    );
-    private final Body earth = new Body(1000, 20, earthMotion);
-    private final MotionState moonMotion = new MotionState(
-        new Vector2D(50, 50),
-        new Vector2D(4, 20)
-    );
-    private final Body moon = new Body(100, 5, moonMotion);
-
+    private final PhysicsWorld world = DemoWorld.create();
     private final PhysicsSystem physicsSystem = new PhysicsSystem();
 
     public Game() {
-        world.addBody(earth);
-        world.addBody(moon);
-
         window = new JFrame("astra");
         gamePanel = new GamePanel(world);
         time = new Time();

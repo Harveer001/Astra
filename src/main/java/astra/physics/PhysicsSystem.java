@@ -4,13 +4,19 @@ package astra.physics;
 import java.util.List;
 
 import astra.physics.body.Body;
+import astra.physics.collision.Collision;
+import astra.physics.collision.CollisionDetector;
+import astra.physics.collision.CollisionResolver;
 import astra.physics.force.GravitationalForce;
 import astra.physics.world.PhysicsWorld;
 
 public class PhysicsSystem {
 
-    private final GravitationalForce gravitationalForce =
-            new GravitationalForce(100);
+    private final GravitationalForce gravitationalForce = new GravitationalForce(100);
+    private final CollisionDetector collisionDetector = new CollisionDetector();
+    private final CollisionResolver collisionResolver = new CollisionResolver();
+
+    private boolean gravityEnabled = true;
 
     public void update(PhysicsWorld world, double deltaTime) {
 
@@ -22,12 +28,14 @@ public class PhysicsSystem {
         }
 
         // 2. Calculate gravitational interactions
-        for (int i = 0; i < bodies.size(); i++) {
-            for (int j = i + 1; j < bodies.size(); j++) {
-                gravitationalForce.apply(
-                    bodies.get(i),
-                    bodies.get(j)
-                );
+        if (gravityEnabled) {
+            for (int i = 0; i < bodies.size(); i++) {
+                for (int j = i + 1; j < bodies.size(); j++) {
+                    gravitationalForce.apply(
+                        bodies.get(i),
+                        bodies.get(j)
+                    );
+                }
             }
         }
 
@@ -46,5 +54,15 @@ public class PhysicsSystem {
         for (Body body : bodies) {
             body.getMotionState().updatePosition(deltaTime);
         }
+
+        // 6. Detect collision
+        List<Collision> collisions =
+            collisionDetector.detectAll(world);
+        
+        // 7. Resolve collisions
+        for (Collision collision : collisions) {
+            collisionResolver.resolve(collision);
+        }
+
     }
 }

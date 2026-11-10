@@ -19,24 +19,15 @@ public class Vector2D {
     }
 
     public Vector2D add(Vector2D other) {
-        return new Vector2D(
-            this.x + other.x,
-            this.y + other.y
-        );
+        return new Vector2D(x + other.x, y + other.y);
     }
 
     public Vector2D subtract(Vector2D other) {
-        return new Vector2D(
-            this.x - other.x,
-            this.y - other.y
-        );
+        return new Vector2D(x - other.x, y - other.y);
     }
 
     public Vector2D multiply(double scalar) {
-        return new Vector2D(
-            this.x * scalar,
-            this.y * scalar
-        );
+        return new Vector2D(x * scalar, y * scalar);
     }
 
     public double magnitude() {
@@ -50,17 +41,19 @@ public class Vector2D {
             return new Vector2D(0, 0);
         }
 
-        return new Vector2D(
-            x / magnitude,
-            y / magnitude
-        );
+        return new Vector2D(x / magnitude, y / magnitude);
     }
 
     public double dot(Vector2D other) {
-        return this.x * other.x + this.y * other.y;
+        return x * other.x + y * other.y;
     }
 
     public double distanceTo(Vector2D other) {
-        return this.subtract(other).magnitude();
+        return subtract(other).magnitude();
+    }
+
+    @Override
+    public String toString() {
+        return "(" + x + ", " + y + ")";
     }
 }

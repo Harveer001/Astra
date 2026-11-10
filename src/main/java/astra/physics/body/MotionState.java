@@ -22,6 +22,10 @@ public class MotionState {
         return position;
     }
 
+    public void setPosition(Vector2D position) {
+        this.position = position;
+    }
+
     public Vector2D getVelocity() {
         return velocity;
     }
