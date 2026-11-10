@@ -71,3 +71,73 @@ Astra/
 │
 ├── README.md
 └── .gitignore
+
+
+________________________________________________________________
+
+
+Astra/
+│
+├── docs/
+│   ├── architecture.md
+│   ├── physics-notes.md
+│   └── roadmap.md
+│
+├── assets/
+│   └── textures/
+│
+├── src/
+│   ├── main/
+│   │   └── java/
+│   │       └── astra/
+│   │           │
+│   │           ├── core/
+│   │           │   └── Time.java
+│   │           │
+│   │           ├── physics/
+│   │           │   │
+│   │           │   ├── body/
+│   │           │   │   ├── Body.java
+│   │           │   │   └── MotionState.java
+│   │           │   │
+│   │           │   ├── math/
+│   │           │   │   └── Vector2D.java
+│   │           │   │
+│   │           │   ├── force/
+│   │           │   │   ├── Gravity.java
+│   │           │   │   └── GravitationalForce.java
+│   │           │   │
+│   │           │   ├── collision/
+│   │           │   │   ├── Collision.java
+│   │           │   │   ├── CollisionDetector.java
+│   │           │   │   └── CollisionResolver.java
+│   │           │   │
+│   │           │   ├── integration/
+│   │           │   │   ├── Integrator.java
+│   │           │   │   └── EulerIntegrator.java
+│   │           │   │
+│   │           │   ├── world/
+│   │           │   │   └── PhysicsWorld.java
+│   │           │   │
+│   │           │   └── PhysicsSystem.java
+│   │           │
+│   │           ├── visualization/
+│   │           │   └── GamePanel.java
+│   │           │
+│   │           ├── demo/
+│   │           │   ├── Main.java
+│   │           │   └── Game.java
+│   │           │
+│   │           └── utils/
+│   │
+│   └── test/
+│       └── java/
+│           └── astra/
+│               └── physics/
+│
+├── python/
+│   ├── experiments/
+│   └── tools/
+│
+├── README.md
+└── .gitignore
